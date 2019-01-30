@@ -134,7 +134,7 @@ void ObjectConverterTest::addCommonSerData()
 										  {QStringLiteral("value"), 2}
 									  }};
 
-	QTest::newRow("poly.enabled.static") << QVariantHash{{QStringLiteral("polymorphing"), QJsonSerializer::Enabled}}
+	QTest::newRow("poly.enabled.static") << QVariantHash{{QStringLiteral("polymorphing"), QVariant::fromValue(QJsonSerializer::Polymorphing::Enabled)}}
 										 << TestQ{{QMetaType::Int, 10, 1}, {QMetaType::Double, 0.1, 2}, {QMetaType::Bool, true, 3}}
 										 << static_cast<QObject*>(nullptr)
 										 << qMetaTypeId<TestObject*>()
@@ -145,7 +145,7 @@ void ObjectConverterTest::addCommonSerData()
 												   {QStringLiteral("value"), 2},
 												   {QStringLiteral("extra1"), 3}
 											   }};
-	QTest::newRow("poly.enabled.dynamic.enabled") << QVariantHash{{QStringLiteral("polymorphing"), QJsonSerializer::Enabled}}
+	QTest::newRow("poly.enabled.dynamic.enabled") << QVariantHash{{QStringLiteral("polymorphing"), QVariant::fromValue(QJsonSerializer::Polymorphing::Enabled)}}
 												  << TestQ{{QMetaType::Int, 10, 1}, {QMetaType::Double, 0.1, 2}, {QMetaType::Bool, true, 3}}
 												  << static_cast<QObject*>(nullptr)
 												  << qMetaTypeId<TestObject*>()
@@ -157,7 +157,7 @@ void ObjectConverterTest::addCommonSerData()
 															{QStringLiteral("extra3"), 3}
 														}};
 
-	QTest::newRow("poly.forced.basic") << QVariantHash{{QStringLiteral("polymorphing"), QJsonSerializer::Forced}}
+	QTest::newRow("poly.forced.basic") << QVariantHash{{QStringLiteral("polymorphing"), QVariant::fromValue(QJsonSerializer::Polymorphing::Forced)}}
 									   << TestQ{{QMetaType::Int, 10, 1}, {QMetaType::Double, 0.1, 2}}
 									   << static_cast<QObject*>(nullptr)
 									   << qMetaTypeId<TestObject*>()
@@ -167,7 +167,7 @@ void ObjectConverterTest::addCommonSerData()
 												{QStringLiteral("key"), 1},
 												{QStringLiteral("value"), 2}
 											}};
-	QTest::newRow("poly.forced.static") << QVariantHash{{QStringLiteral("polymorphing"), QJsonSerializer::Forced}}
+	QTest::newRow("poly.forced.static") << QVariantHash{{QStringLiteral("polymorphing"), QVariant::fromValue(QJsonSerializer::Polymorphing::Forced)}}
 										<< TestQ{{QMetaType::Int, 10, 1}, {QMetaType::Double, 0.1, 2}, {QMetaType::Bool, true, 3}}
 										<< static_cast<QObject*>(nullptr)
 										<< qMetaTypeId<TestObject*>()
@@ -178,7 +178,7 @@ void ObjectConverterTest::addCommonSerData()
 												  {QStringLiteral("value"), 2},
 												  {QStringLiteral("extra1"), 3}
 											  }};
-	QTest::newRow("poly.forced.nonstatic") << QVariantHash{{QStringLiteral("polymorphing"), QJsonSerializer::Forced}}
+	QTest::newRow("poly.forced.nonstatic") << QVariantHash{{QStringLiteral("polymorphing"), QVariant::fromValue(QJsonSerializer::Polymorphing::Forced)}}
 										   << TestQ{{QMetaType::Int, 10, 1}, {QMetaType::Double, 0.1, 2}, {QMetaType::Bool, true, 3}}
 										   << static_cast<QObject*>(nullptr)
 										   << qMetaTypeId<TestObject*>()
@@ -189,7 +189,7 @@ void ObjectConverterTest::addCommonSerData()
 													 {QStringLiteral("value"), 2},
 													 {QStringLiteral("extra2"), 3}
 												 }};
-	QTest::newRow("poly.forced.dynamic.enabled") << QVariantHash{{QStringLiteral("polymorphing"), QJsonSerializer::Forced}}
+	QTest::newRow("poly.forced.dynamic.enabled") << QVariantHash{{QStringLiteral("polymorphing"), QVariant::fromValue(QJsonSerializer::Polymorphing::Forced)}}
 												 << TestQ{{QMetaType::Int, 10, 1}, {QMetaType::Double, 0.1, 2}, {QMetaType::Bool, true, 3}}
 												 << static_cast<QObject*>(nullptr)
 												 << qMetaTypeId<TestObject*>()
@@ -200,7 +200,7 @@ void ObjectConverterTest::addCommonSerData()
 														   {QStringLiteral("value"), 2},
 														   {QStringLiteral("extra3"), 3}
 													   }};
-	QTest::newRow("poly.forced.dynamic.disabled") << QVariantHash{{QStringLiteral("polymorphing"), QJsonSerializer::Forced}}
+	QTest::newRow("poly.forced.dynamic.disabled") << QVariantHash{{QStringLiteral("polymorphing"), QVariant::fromValue(QJsonSerializer::Polymorphing::Forced)}}
 												  << TestQ{{QMetaType::Int, 10, 1}, {QMetaType::Double, 0.1, 2}, {QMetaType::Bool, true, 3}}
 												  << static_cast<QObject*>(nullptr)
 												  << qMetaTypeId<TestObject*>()
@@ -211,7 +211,7 @@ void ObjectConverterTest::addCommonSerData()
 															{QStringLiteral("value"), 2},
 															{QStringLiteral("extra3"), 3}
 														}};
-	QTest::newRow("poly.forced.derived") << QVariantHash{{QStringLiteral("polymorphing"), QJsonSerializer::Forced}}
+	QTest::newRow("poly.forced.derived") << QVariantHash{{QStringLiteral("polymorphing"), QVariant::fromValue(QJsonSerializer::Polymorphing::Forced)}}
 										 << TestQ{{QMetaType::Int, 10, 1}, {QMetaType::Double, 0.1, 2}, {QMetaType::Bool, true, 3}}
 										 << static_cast<QObject*>(nullptr)
 										 << qMetaTypeId<TestObject*>()
@@ -226,7 +226,7 @@ void ObjectConverterTest::addCommonSerData()
 
 void ObjectConverterTest::addSerData()
 {
-	QTest::newRow("poly.disabled.static") << QVariantHash{{QStringLiteral("polymorphing"), QJsonSerializer::Disabled}}
+	QTest::newRow("poly.disabled.static") << QVariantHash{{QStringLiteral("polymorphing"), QVariant::fromValue(QJsonSerializer::Polymorphing::Disabled)}}
 										  << TestQ{{QMetaType::Int, 10, 1}, {QMetaType::Double, 0.1, 2}}
 										  << static_cast<QObject*>(nullptr)
 										  << qMetaTypeId<TestObject*>()
@@ -235,7 +235,7 @@ void ObjectConverterTest::addSerData()
 												   {QStringLiteral("key"), 1},
 												   {QStringLiteral("value"), 2}
 											   }};
-	QTest::newRow("poly.disabled.dynamic") << QVariantHash{{QStringLiteral("polymorphing"), QJsonSerializer::Disabled}}
+	QTest::newRow("poly.disabled.dynamic") << QVariantHash{{QStringLiteral("polymorphing"), QVariant::fromValue(QJsonSerializer::Polymorphing::Disabled)}}
 										   << TestQ{{QMetaType::Int, 10, 1}, {QMetaType::Double, 0.1, 2}}
 										   << static_cast<QObject*>(nullptr)
 										   << qMetaTypeId<TestObject*>()
@@ -245,7 +245,7 @@ void ObjectConverterTest::addSerData()
 													{QStringLiteral("value"), 2}
 												}};
 
-	QTest::newRow("poly.enabled.nonstatic") << QVariantHash{{QStringLiteral("polymorphing"), QJsonSerializer::Enabled}}
+	QTest::newRow("poly.enabled.nonstatic") << QVariantHash{{QStringLiteral("polymorphing"), QVariant::fromValue(QJsonSerializer::Polymorphing::Enabled)}}
 											<< TestQ{{QMetaType::Int, 10, 1}, {QMetaType::Double, 0.1, 2}}
 											<< static_cast<QObject*>(nullptr)
 											<< qMetaTypeId<TestObject*>()
@@ -254,7 +254,7 @@ void ObjectConverterTest::addSerData()
 													  {QStringLiteral("key"), 1},
 													  {QStringLiteral("value"), 2}
 												  }};
-	QTest::newRow("poly.enabled.dynamic.disabled") << QVariantHash{{QStringLiteral("polymorphing"), QJsonSerializer::Enabled}}
+	QTest::newRow("poly.enabled.dynamic.disabled") << QVariantHash{{QStringLiteral("polymorphing"), QVariant::fromValue(QJsonSerializer::Polymorphing::Enabled)}}
 												   << TestQ{{QMetaType::Int, 10, 1}, {QMetaType::Double, 0.1, 2}, {QMetaType::Bool, true, 3}}
 												   << static_cast<QObject*>(nullptr)
 												   << qMetaTypeId<TestObject*>()
@@ -263,7 +263,7 @@ void ObjectConverterTest::addSerData()
 															 {QStringLiteral("key"), 1},
 															 {QStringLiteral("value"), 2}
 														 }};
-	QTest::newRow("poly.enabled.derived") << QVariantHash{{QStringLiteral("polymorphing"), QJsonSerializer::Enabled}}
+	QTest::newRow("poly.enabled.derived") << QVariantHash{{QStringLiteral("polymorphing"), QVariant::fromValue(QJsonSerializer::Polymorphing::Enabled)}}
 										  << TestQ{{QMetaType::Int, 10, 1}, {QMetaType::Double, 0.1, 2}, {QMetaType::Bool, true, 3}}
 										  << static_cast<QObject*>(nullptr)
 										  << qMetaTypeId<TestObject*>()
@@ -283,7 +283,7 @@ void ObjectConverterTest::addDeserData()
 							<< QVariant{}
 							<< QJsonValue{QJsonObject{}};
 
-	QTest::newRow("poly.disabled.static") << QVariantHash{{QStringLiteral("polymorphing"), QJsonSerializer::Disabled}}
+	QTest::newRow("poly.disabled.static") << QVariantHash{{QStringLiteral("polymorphing"), QVariant::fromValue(QJsonSerializer::Polymorphing::Disabled)}}
 										  << TestQ{
 												   {QMetaType::Int, 10, 1},
 												   {QMetaType::Double, 0.1, 2},
@@ -299,7 +299,7 @@ void ObjectConverterTest::addDeserData()
 												   {QStringLiteral("value"), 2},
 												   {QStringLiteral("extra1"), 3}
 											   }};
-	QTest::newRow("poly.disabled.dynamic") << QVariantHash{{QStringLiteral("polymorphing"), QJsonSerializer::Disabled}}
+	QTest::newRow("poly.disabled.dynamic") << QVariantHash{{QStringLiteral("polymorphing"), QVariant::fromValue(QJsonSerializer::Polymorphing::Disabled)}}
 										   << TestQ{
 													{QMetaType::Int, 10, 1},
 													{QMetaType::Double, 0.1, 2},
@@ -316,7 +316,7 @@ void ObjectConverterTest::addDeserData()
 													{QStringLiteral("extra3"), 3}
 												}};
 
-	QTest::newRow("poly.forced.invalid") << QVariantHash{{QStringLiteral("polymorphing"), QJsonSerializer::Forced}}
+	QTest::newRow("poly.forced.invalid") << QVariantHash{{QStringLiteral("polymorphing"), QVariant::fromValue(QJsonSerializer::Polymorphing::Forced)}}
 										 << TestQ{}
 										 << static_cast<QObject*>(nullptr)
 										 << qMetaTypeId<TestObject*>()
@@ -326,7 +326,7 @@ void ObjectConverterTest::addDeserData()
 												  {QStringLiteral("value"), 2}
 											  }};
 
-	QTest::newRow("validate.none") << QVariantHash{{QStringLiteral("validationFlags"), QVariant::fromValue<QJsonSerializer::ValidationFlags>(QJsonSerializer::StandardValidation)}}
+	QTest::newRow("validate.none") << QVariantHash{{QStringLiteral("validationFlags"), QVariant::fromValue<QJsonSerializer::ValidationFlags>(QJsonSerializer::ValidationFlag::StandardValidation)}}
 								   << TestQ{{QMetaType::Int, 10, 1}, {QMetaType::UnknownType, 24, 24}}
 								   << static_cast<QObject*>(nullptr)
 								   << qMetaTypeId<TestObject*>()
@@ -335,7 +335,7 @@ void ObjectConverterTest::addDeserData()
 											{QStringLiteral("key"), 1},
 											{QStringLiteral("extra"), 24}
 										}};
-	QTest::newRow("validate.extra.invalid") << QVariantHash{{QStringLiteral("validationFlags"), QVariant::fromValue<QJsonSerializer::ValidationFlags>(QJsonSerializer::NoExtraProperties)}}
+	QTest::newRow("validate.extra.invalid") << QVariantHash{{QStringLiteral("validationFlags"), QVariant::fromValue<QJsonSerializer::ValidationFlags>(QJsonSerializer::ValidationFlag::NoExtraProperties)}}
 											<< TestQ{{QMetaType::Int, 10, 1}, {QMetaType::UnknownType, 24, 24}}
 											<< static_cast<QObject*>(nullptr)
 											<< qMetaTypeId<TestObject*>()
@@ -344,7 +344,7 @@ void ObjectConverterTest::addDeserData()
 													{QStringLiteral("key"), 1},
 													{QStringLiteral("extra"), 24}
 												}};
-	QTest::newRow("validate.extra.valid") << QVariantHash{{QStringLiteral("validationFlags"), QVariant::fromValue<QJsonSerializer::ValidationFlags>(QJsonSerializer::NoExtraProperties)}}
+	QTest::newRow("validate.extra.valid") << QVariantHash{{QStringLiteral("validationFlags"), QVariant::fromValue<QJsonSerializer::ValidationFlags>(QJsonSerializer::ValidationFlag::NoExtraProperties)}}
 										  << TestQ{{QMetaType::Int, 10, 1}}
 										  << static_cast<QObject*>(nullptr)
 										  << qMetaTypeId<TestObject*>()
@@ -352,7 +352,7 @@ void ObjectConverterTest::addDeserData()
 										  << QJsonValue{QJsonObject{
 													{QStringLiteral("key"), 1}
 												}};
-	QTest::newRow("validate.all.invalid") << QVariantHash{{QStringLiteral("validationFlags"), QVariant::fromValue<QJsonSerializer::ValidationFlags>(QJsonSerializer::AllProperties)}}
+	QTest::newRow("validate.all.invalid") << QVariantHash{{QStringLiteral("validationFlags"), QVariant::fromValue<QJsonSerializer::ValidationFlags>(QJsonSerializer::ValidationFlag::AllProperties)}}
 										  << TestQ{{QMetaType::Int, 10, 1}, {QMetaType::UnknownType, 24, 24}}
 										  << static_cast<QObject*>(nullptr)
 										  << qMetaTypeId<TestObject*>()
@@ -361,7 +361,7 @@ void ObjectConverterTest::addDeserData()
 													{QStringLiteral("key"), 1},
 													{QStringLiteral("extra"), 24}
 												}};
-	QTest::newRow("validate.all.valid") << QVariantHash{{QStringLiteral("validationFlags"), QVariant::fromValue<QJsonSerializer::ValidationFlags>(QJsonSerializer::AllProperties)}}
+	QTest::newRow("validate.all.valid") << QVariantHash{{QStringLiteral("validationFlags"), QVariant::fromValue<QJsonSerializer::ValidationFlags>(QJsonSerializer::ValidationFlag::AllProperties)}}
 										<< TestQ{{QMetaType::Int, 10, 1}, {QMetaType::Double, 10.1, 2}, {QMetaType::UnknownType, 24, 24}}
 										<< static_cast<QObject*>(nullptr)
 										<< qMetaTypeId<TestObject*>()
@@ -372,7 +372,7 @@ void ObjectConverterTest::addDeserData()
 												{QStringLiteral("extra"), 24}
 											}};
 	QTest::newRow("validate.all.name.invalid") << QVariantHash{
-														{QStringLiteral("validationFlags"), QVariant::fromValue<QJsonSerializer::ValidationFlags>(QJsonSerializer::AllProperties)},
+														{QStringLiteral("validationFlags"), QVariant::fromValue<QJsonSerializer::ValidationFlags>(QJsonSerializer::ValidationFlag::AllProperties)},
 														{QStringLiteral("keepObjectName"), true}
 													}
 											   << TestQ{{QMetaType::Int, 10, 1}, {QMetaType::Double, 10.1, 2}, {QMetaType::UnknownType, 24, 24}}
@@ -385,7 +385,7 @@ void ObjectConverterTest::addDeserData()
 														 {QStringLiteral("extra"), 24}
 													 }};
 	QTest::newRow("validate.all.name.valid") << QVariantHash{
-													{QStringLiteral("validationFlags"), QVariant::fromValue<QJsonSerializer::ValidationFlags>(QJsonSerializer::AllProperties)},
+													{QStringLiteral("validationFlags"), QVariant::fromValue<QJsonSerializer::ValidationFlags>(QJsonSerializer::ValidationFlag::AllProperties)},
 													{QStringLiteral("keepObjectName"), true}
 												}
 											 << TestQ{{QMetaType::Int, 10, 1}, {QMetaType::Double, 10.1, 2}, {QMetaType::QString, QStringLiteral("TestObject"), 3}, {QMetaType::UnknownType, 24, 24}}
@@ -398,7 +398,7 @@ void ObjectConverterTest::addDeserData()
 													{QStringLiteral("objectName"), 3},
 													{QStringLiteral("extra"), 24}
 												}};
-	QTest::newRow("validate.full.invalid") << QVariantHash{{QStringLiteral("validationFlags"), QVariant::fromValue<QJsonSerializer::ValidationFlags>(QJsonSerializer::FullValidation)}}
+	QTest::newRow("validate.full.invalid") << QVariantHash{{QStringLiteral("validationFlags"), QVariant::fromValue<QJsonSerializer::ValidationFlags>(QJsonSerializer::ValidationFlag::FullValidation)}}
 										   << TestQ{{QMetaType::Int, 10, 1}, {QMetaType::UnknownType, 24, 24}}
 										   << static_cast<QObject*>(nullptr)
 										   << qMetaTypeId<TestObject*>()
@@ -407,7 +407,7 @@ void ObjectConverterTest::addDeserData()
 													{QStringLiteral("key"), 1},
 													{QStringLiteral("extra"), 24}
 												}};
-	QTest::newRow("validate.full.valid") << QVariantHash{{QStringLiteral("validationFlags"), QVariant::fromValue<QJsonSerializer::ValidationFlags>(QJsonSerializer::FullValidation)}}
+	QTest::newRow("validate.full.valid") << QVariantHash{{QStringLiteral("validationFlags"), QVariant::fromValue<QJsonSerializer::ValidationFlags>(QJsonSerializer::ValidationFlag::FullValidation)}}
 										 << TestQ{{QMetaType::Int, 10, 1}, {QMetaType::Double, 10.1, 2}}
 										 << static_cast<QObject*>(nullptr)
 										 << qMetaTypeId<TestObject*>()

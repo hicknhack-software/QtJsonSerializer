@@ -49,7 +49,7 @@ class Q_JSONSERIALIZER_EXPORT QJsonSerializer : public QObject, protected QJsonT
 
 public:
 	//! Flags to specify how strict the serializer should validate when deserializing
-	enum ValidationFlag {
+	enum class ValidationFlag {
 		StandardValidation = 0x00, //!< Do not perform extra validation, only make sure types are valid and compatible
 		NoExtraProperties = 0x01, //!< Make sure the json does not contain any properties that are not in the type to deserialize it to
 		AllProperties = 0x02, //!< Make sure all properties of the type have a value in the deserialized json data
@@ -59,7 +59,7 @@ public:
 	Q_FLAG(ValidationFlags)
 
 	//! Enum to specify the modes of polymorphism
-	enum Polymorphing {
+	enum class Polymorphing {
 		Disabled, //!< Do not serialize polymorphic and ignore information about classes in json
 		Enabled, //!< Use polymorphism where declared by the classes/json
 		Forced //!< Treat every object polymorphic, and required the class information to be present in json

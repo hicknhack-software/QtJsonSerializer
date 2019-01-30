@@ -552,8 +552,8 @@ void SerializerTest::resetProps()
 	serializer->setEnumAsString(false);
 	serializer->setValidateBase64(true);
 	serializer->setUseBcp47Locale(true);
-	serializer->setValidationFlags(QJsonSerializer::StandardValidation);
-	serializer->setPolymorphing(QJsonSerializer::Enabled);
+	serializer->setValidationFlags(QJsonSerializer::ValidationFlag::StandardValidation);
+	serializer->setPolymorphing(QJsonSerializer::Polymorphing::Enabled);
 }
 
 namespace  {

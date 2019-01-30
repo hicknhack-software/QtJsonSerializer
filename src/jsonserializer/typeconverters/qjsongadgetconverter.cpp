@@ -95,7 +95,7 @@ QVariant QJsonGadgetConverter::deserialize(int propertyType, const QJsonValue &v
 
 	//collect required properties, if set
 	QSet<QByteArray> reqProps;
-	if(validationFlags.testFlag(QJsonSerializer::AllProperties)) {
+	if(validationFlags.testFlag(QJsonSerializer::ValidationFlag::AllProperties)) {
 		for(auto i = 0; i < metaObject->propertyCount(); i++) {
 			auto property = metaObject->property(i);
 			if(property.isStored())
@@ -111,7 +111,7 @@ QVariant QJsonGadgetConverter::deserialize(int propertyType, const QJsonValue &v
 			auto subValue = helper->deserializeSubtype(property, it.value(), nullptr);
 			property.writeOnGadget(gadgetPtr, subValue);
 			reqProps.remove(property.name());
-		} else if(validationFlags.testFlag(QJsonSerializer::NoExtraProperties)) {
+		} else if(validationFlags.testFlag(QJsonSerializer::ValidationFlag::NoExtraProperties)) {
 			throw QJsonDeserializationException("Found extra property " +
 												it.key().toUtf8() +
 												" but extra properties are not allowed");
@@ -119,7 +119,7 @@ QVariant QJsonGadgetConverter::deserialize(int propertyType, const QJsonValue &v
 	}
 
 	//make shure all required properties have been read
-	if(validationFlags.testFlag(QJsonSerializer::AllProperties) && !reqProps.isEmpty()) {
+	if(validationFlags.testFlag(QJsonSerializer::ValidationFlag::AllProperties) && !reqProps.isEmpty()) {
 		throw QJsonDeserializationException(QByteArray("Not all properties for ") +
 											metaObject->className() +
 											QByteArray(" are present in the json object. Missing properties: ") +

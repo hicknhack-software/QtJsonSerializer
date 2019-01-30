@@ -28,8 +28,8 @@ public:
 	bool enumAsString = false;
 	bool validateBase64 = true;
 	bool useBcp47Locale = true;
-	QJsonSerializer::ValidationFlags validationFlags = QJsonSerializer::StandardValidation;
-	QJsonSerializer::Polymorphing polymorphing = QJsonSerializer::Enabled;
+	QJsonSerializer::ValidationFlags validationFlags = QJsonSerializer::ValidationFlag::StandardValidation;
+	QJsonSerializer::Polymorphing polymorphing = QJsonSerializer::Polymorphing::Enabled;
 	QJsonSerializer::MultiMapMode multiMapMode = QJsonSerializer::MultiMapMode::Map; //TODO which one is the better default?
 
 	QReadWriteLock typeConverterLock{};
