@@ -76,27 +76,9 @@ QJsonValue QJsonSerializer::serialize(const QVariant &data) const
 	return serializeImpl(data);
 }
 
-void QJsonSerializer::serializeTo(QIODevice *device, const QVariant &data) const
-{
-#ifndef QT_NO_DEBUG
-	serializeToImpl(device, data, QJsonDocument::Indented);
-#else
-	serializeToImpl(device, data, QJsonDocument::Compact);
-#endif
-}
-
 void QJsonSerializer::serializeTo(QIODevice *device, const QVariant &data, QJsonDocument::JsonFormat format) const
 {
 	serializeToImpl(device, data, format);
-}
-
-QByteArray QJsonSerializer::serializeTo(const QVariant &data) const
-{
-#ifndef QT_NO_DEBUG
-	return serializeToImpl(data, QJsonDocument::Indented);
-#else
-	return serializeToImpl(data, QJsonDocument::Compact);
-#endif
 }
 
 QByteArray QJsonSerializer::serializeTo(const QVariant &data, QJsonDocument::JsonFormat format) const
@@ -132,7 +114,7 @@ void QJsonSerializer::addJsonTypeConverterFactory(const QSharedPointer<QJsonType
 	QJsonSerializerPrivate::typeConverterFactories.append(factory);
 }
 
-void QJsonSerializer::addJsonTypeConverter(QSharedPointer<QJsonTypeConverter> converter)
+void QJsonSerializer::addJsonTypeConverter(const QSharedPointer<QJsonTypeConverter> &converter)
 {
 	Q_ASSERT_X(converter, Q_FUNC_INFO, "converter must not be null!");
 	QWriteLocker tLocker{&d->typeConverterLock};
@@ -150,11 +132,6 @@ void QJsonSerializer::addJsonTypeConverter(QSharedPointer<QJsonTypeConverter> co
 
 	d->typeConverterSerCache.clear();
 	d->typeConverterDeserCache.clear();
-}
-
-void QJsonSerializer::addJsonTypeConverter(QJsonTypeConverter *converter)
-{
-	addJsonTypeConverter(QSharedPointer<QJsonTypeConverter>(converter));
 }
 
 void QJsonSerializer::setAllowDefaultNull(bool allowDefaultNull)
@@ -374,7 +351,7 @@ QVariant QJsonSerializer::deserializeValue(int propertyType, const QJsonValue &v
 	return value.toVariant();
 }
 
-QJsonValue QJsonSerializer::serializeEnum(const QMetaEnum &metaEnum, const QVariant &value) const
+QJsonValue QJsonSerializer::serializeEnum(QMetaEnum metaEnum, const QVariant &value) const
 {
 	if(d->enumAsString) {
 		if(metaEnum.isFlag())
@@ -385,7 +362,7 @@ QJsonValue QJsonSerializer::serializeEnum(const QMetaEnum &metaEnum, const QVari
 		return value.toInt();
 }
 
-QVariant QJsonSerializer::deserializeEnum(const QMetaEnum &metaEnum, const QJsonValue &value) const
+QVariant QJsonSerializer::deserializeEnum(QMetaEnum metaEnum, const QJsonValue &value) const
 {
 	if(value.isString()) {
 		auto result = -1;
@@ -444,27 +421,9 @@ QJsonValue QJsonSerializer::serializeImpl(const QVariant &data) const
 	return serializeVariant(data.userType(), data);
 }
 
-void QJsonSerializer::serializeToImpl(QIODevice *device, const QVariant &data) const
-{
-#ifndef QT_NO_DEBUG
-	serializeToImpl(device, data, QJsonDocument::Indented);
-#else
-	serializeToImpl(device, data, QJsonDocument::Compact);
-#endif
-}
-
 void QJsonSerializer::serializeToImpl(QIODevice *device, const QVariant &data, QJsonDocument::JsonFormat format) const
 {
 	writeToDevice(serializeVariant(data.userType(), data), device, format);
-}
-
-QByteArray QJsonSerializer::serializeToImpl(const QVariant &data) const
-{
-#ifndef QT_NO_DEBUG
-	return serializeToImpl(data, QJsonDocument::Indented);
-#else
-	return serializeToImpl(data, QJsonDocument::Compact);
-#endif
 }
 
 QByteArray QJsonSerializer::serializeToImpl(const QVariant &data, QJsonDocument::JsonFormat format) const

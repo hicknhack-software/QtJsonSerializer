@@ -198,7 +198,7 @@ const QMetaObject *QJsonObjectConverter::getMetaObject(int typeId) const
 }
 
 template<typename T>
-T QJsonObjectConverter::extract(QVariant variant) const
+T QJsonObjectConverter::extract(QVariant variant) const // clazy:exclude=function-args-by-ref
 {
 	auto id = qMetaTypeId<T>();
 	if(variant.canConvert(id) && variant.convert(id))
