@@ -1,7 +1,7 @@
 import qbs
 import qbs.TextFile
 
-DynamicLibrary {
+StaticLibrary {
     id: root
     targetName: "QtJsonSerializer"
 
