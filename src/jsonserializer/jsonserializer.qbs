@@ -25,11 +25,6 @@ Product {
         }
     }
 
-    Properties {
-        condition: qbs.targetOS.contains("android")
-        type: ["staticlibrary"]
-    }
-
     cpp.cxxLanguageVersion: "c++17"
     cpp.includePaths: [
         ".",
