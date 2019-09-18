@@ -4,26 +4,17 @@ import qbs.TextFile
 Product {
     id: root
 
-    property bool isAndroid: qbs.targetOS.contains("android")
-    property bool isMacOS: qbs.targetOS.contains("macos")
-    property bool isWindows: qbs.targetOS.contains("windows")
-
     targetName: "QtJsonSerializer"
 
     Depends { name: "Qt.core" }
     Depends { name: "cpp" }
 
-    type: {
-        if (isAndroid) {
-            return "staticlibrary"
-        }
-        else if (isMacOS) {
-            return "staticlibrary"
-        }
-        else if (isWindows) {
-            return "dynamiclibrary"
-        }
-    }
+    type: (isStaticLibrary ? "staticlibrary" : "dynamiclibrary")
+
+    readonly property bool isAndroid: qbs.targetOS.contains("android")
+    readonly property bool isMacOS: qbs.targetOS.contains("macos")
+    readonly property bool isWindows: qbs.targetOS.contains("windows")
+    readonly property bool isStaticLibrary: isAndroid || isMacOS
 
     cpp.cxxLanguageVersion: "c++17"
     cpp.includePaths: [
