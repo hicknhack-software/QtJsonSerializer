@@ -1,12 +1,21 @@
 import qbs
 import qbs.TextFile
 
-DynamicLibrary {
+Product {
     id: root
+
     targetName: "QtJsonSerializer"
 
     Depends { name: "Qt.core" }
     Depends { name: "cpp" }
+
+    type: (isStaticLibrary ? "staticlibrary" : "dynamiclibrary")
+
+    readonly property bool isAndroid: qbs.targetOS.contains("android")
+    readonly property bool isMacOS: qbs.targetOS.contains("macos")
+    readonly property bool isWindows: qbs.targetOS.contains("windows")
+    readonly property bool isStaticLibrary: isAndroid || isMacOS
+
     cpp.cxxLanguageVersion: "c++17"
     cpp.includePaths: [
         ".",
@@ -70,39 +79,39 @@ DynamicLibrary {
         fileTags: ["template"]
     }
     property varList types: [
-            {className: "bool", modes: ["Basic"]},
-            {className: "int", modes: ["Basic"]},
-            {className: "uint", modes: ["Basic"]},
-            {className: "qlonglong", modes: ["Basic"]},
-            {className: "qulonglong", modes: ["Basic"]},
-            {className: "double", modes: ["Basic"]},
-            {className: "long", modes: ["Basic"]},
-            {className: "short", modes: ["Basic"]},
-            {className: "char", modes: ["Basic"]},
-            {className: "signed char", modes: ["Basic"]},
-            {className: "ulong", modes: ["Basic"]},
-            {className: "ushort", modes: ["Basic"]},
-            {className: "uchar", modes: ["Basic"]},
-            {className: "float", modes: ["Basic"]},
-            {className: "QObject*", modes: ["Basic"]},
-            {className: "QChar", modes: ["Basic"]},
-            {className: "QString", modes: ["Basic"]},
-            {className: "QDate", modes: ["Basic"]},
-            {className: "QTime", modes: ["Basic"]},
-            {className: "QDateTime", modes: ["Basic"]},
-            {className: "QUrl", modes: ["Basic"]},
-            {className: "QUuid", modes: ["Basic"]},
-            {className: "QJsonValue", modes: ["Basic"]},
-            {className: "QJsonObject", modes: ["Basic"]},
-            {className: "QJsonArray", modes: ["Basic"]},
-            {className: "QVersionNumber", modes: ["Basic"]},
-            {className: "QLocale", modes: ["Basic"]},
-            {className: "QRegularExpression", modes: ["Basic"]},
-            {className: "QSize", modes: ["List"]},
-            {className: "QPoint", modes: ["List"]},
-            {className: "QLine", modes: ["List"]},
-            {className: "QRect", modes: ["List"]},
-            {className: "QByteArray", modes: ["Map", "Set"]}
+        {className: "bool", modes: ["Basic"]},
+        {className: "int", modes: ["Basic"]},
+        {className: "uint", modes: ["Basic"]},
+        {className: "qlonglong", modes: ["Basic"]},
+        {className: "qulonglong", modes: ["Basic"]},
+        {className: "double", modes: ["Basic"]},
+        {className: "long", modes: ["Basic"]},
+        {className: "short", modes: ["Basic"]},
+        {className: "char", modes: ["Basic"]},
+        {className: "signed char", modes: ["Basic"]},
+        {className: "ulong", modes: ["Basic"]},
+        {className: "ushort", modes: ["Basic"]},
+        {className: "uchar", modes: ["Basic"]},
+        {className: "float", modes: ["Basic"]},
+        {className: "QObject*", modes: ["Basic"]},
+        {className: "QChar", modes: ["Basic"]},
+        {className: "QString", modes: ["Basic"]},
+        {className: "QDate", modes: ["Basic"]},
+        {className: "QTime", modes: ["Basic"]},
+        {className: "QDateTime", modes: ["Basic"]},
+        {className: "QUrl", modes: ["Basic"]},
+        {className: "QUuid", modes: ["Basic"]},
+        {className: "QJsonValue", modes: ["Basic"]},
+        {className: "QJsonObject", modes: ["Basic"]},
+        {className: "QJsonArray", modes: ["Basic"]},
+        {className: "QVersionNumber", modes: ["Basic"]},
+        {className: "QLocale", modes: ["Basic"]},
+        {className: "QRegularExpression", modes: ["Basic"]},
+        {className: "QSize", modes: ["List"]},
+        {className: "QPoint", modes: ["List"]},
+        {className: "QLine", modes: ["List"]},
+        {className: "QRect", modes: ["List"]},
+        {className: "QByteArray", modes: ["Map", "Set"]}
     ]
     Rule {
         inputs: "template"
@@ -114,14 +123,14 @@ DynamicLibrary {
             }
             var r = [];
             r.push({
-                filePath: ".reggen/qjsonconverterreg_all.cpp",
-                fileTags: ["cpp"],
-            });
+                       filePath: ".reggen/qjsonconverterreg_all.cpp",
+                       fileTags: ["cpp"],
+                   });
             product.types.forEach(function(type) {
                 r.push({
-                    filePath: ".reggen/qjsonconverterreg_"+ myEscape(type.className) +".cpp",
-                    fileTags: ["cpp"],
-                });
+                           filePath: ".reggen/qjsonconverterreg_"+ myEscape(type.className) +".cpp",
+                           fileTags: ["cpp"],
+                       });
             });
             return r;
         }
