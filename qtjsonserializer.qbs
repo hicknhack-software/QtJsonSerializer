@@ -1,11 +1,20 @@
 import qbs
 
 Project {
+    id: qtjsonserializer
+
+    property bool install: false
+    property string installDir
+
     name: "QtJsonSerializer"
 
-    references: [
-        "src",
-    ]
+    SubProject {
+        filePath: "src/src.qbs"
+        Properties {
+            install: qtjsonserializer.install
+            installDir: qtjsonserializer.installDir
+        }
+    }
 
     AutotestRunner {}
 
