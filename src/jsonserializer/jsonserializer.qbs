@@ -11,6 +11,8 @@ Project {
         Depends { name: "Qt.core" }
         Depends { name: "cpp" }
 
+        type: (isStaticLibrary ? "staticlibrary" : "dynamiclibrary")
+
         readonly property bool isMacOS: qbs.targetOS.contains("macos")
         readonly property bool isWindows: qbs.targetOS.contains("windows")
         readonly property bool isStaticLibrary: isForAndroid || isMacOS
