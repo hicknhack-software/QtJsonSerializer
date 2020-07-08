@@ -2,6 +2,8 @@ import qbs
 import qbs.TextFile
 
 Project {
+    minimumQbsVersion: "1.16"
+
     property bool install: false
     property string installDir
 
@@ -11,11 +13,9 @@ Project {
         Depends { name: "Qt.core" }
         Depends { name: "cpp" }
 
-        type: (isStaticLibrary ? "staticlibrary" : "dynamiclibrary")
-
         readonly property bool isMacOS: qbs.targetOS.contains("macos")
         readonly property bool isWindows: qbs.targetOS.contains("windows")
-        readonly property bool isStaticLibrary: isForAndroid || isMacOS
+        type: ((isForAndroid || isMacOS) ? "staticlibrary" : "dynamiclibrary")
 
         Group {
             condition: project.install
